@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f5fa">
+  <meta name="description" content="AgentMore 交互体验优化设计项目展示：从体验路径与问题归纳，到信息层级重构、文件获取与修改结果反馈。">
+  <title>AgentMore｜交互体验优化设计</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+    body { margin: 0; background: #e8edf5; color: #191c24; }
+    button { font: inherit; cursor: pointer; }
+    a { color: inherit; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .presentation { max-width: 1920px; margin: 0 auto; background: #fff; box-shadow: 0 0 64px rgba(26,52,91,.10); }
+    .slide { display: block; position: relative; width: 100%; line-height: 0; scroll-snap-align: start; }
+    .slide img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #fff; }
+    .slide-video { position: absolute; left: 59.6354167%; width: 34.375%; height: 33.8888889%; display: block; object-fit: cover; border-radius: 5px; background: #fff; }
+    .slide-video.top { top: 20.8333333%; }
+    .slide-video.bottom { top: 56.8518519%; }
+    .slide-video.file-preview { left: 57.65625%; top: 18.1481481%; width: 37.1354167%; height: 36.6666667%; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 72.22%, 3.93% 72.22%, 3.93% 40.91%, 8.13% 40.91%, 8.13% 33.33%, 0 33.33%); }
+    .slide-video.improvements { left: 12.03125%; top: 17.4074074%; width: 75.8854167%; height: 74.9074074%; border-radius: 0; }
+    .slide:focus-visible { outline: 4px solid #0048ff; outline-offset: -4px; }
+    .toolbar { position: fixed; z-index: 20; right: clamp(14px, 3vw, 48px); bottom: clamp(14px, 3vw, 36px); display: flex; align-items: center; gap: 6px; padding: 7px; border: 1px solid rgba(255,255,255,.72); border-radius: 16px; background: rgba(25,28,36,.88); color: #fff; box-shadow: 0 12px 36px rgba(0,0,0,.22); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .toolbar button { display: grid; place-items: center; min-width: 36px; height: 36px; padding: 0 8px; border: 0; border-radius: 10px; background: transparent; color: inherit; font-size: 17px; }
+    .toolbar button:hover, .toolbar button:focus-visible { background: rgba(255,255,255,.18); outline: none; }
+    .toolbar button:disabled { opacity: .35; cursor: default; }
+    .toolbar button:disabled:hover { background: transparent; }
+    .toolbar .count { min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; font-size: 12px; letter-spacing: .04em; }
+    .toolbar .divider { height: 20px; width: 1px; margin: 0 2px; background: rgba(255,255,255,.25); }
+    .index { position: fixed; z-index: 19; top: 0; right: 0; bottom: 0; width: min(340px, 100vw); padding: 24px 20px 90px; overflow: auto; background: rgba(248,250,255,.98); box-shadow: -16px 0 48px rgba(20,38,74,.16); transform: translateX(105%); transition: transform .22s ease; }
+    .index[aria-hidden="false"] { transform: translateX(0); }
+    .index h2 { margin: 0 0 4px; font-size: 20px; }
+    .index p { margin: 0 0 18px; color: #7a7d85; font-size: 12px; }
+    .index button { width: 100%; display: flex; gap: 12px; align-items: baseline; padding: 11px 12px; text-align: left; border: 0; border-radius: 10px; background: transparent; color: #30343c; font-size: 13px; line-height: 1.5; }
+    .index button:hover, .index button:focus-visible { background: #e6edff; outline: none; }
+    .index button[aria-current="true"] { background: #dbe7ff; color: #0048ff; font-weight: 650; }
+    .index button span { flex: 0 0 23px; font-size: 11px; opacity: .7; font-variant-numeric: tabular-nums; }
+    .backdrop { position: fixed; z-index: 18; inset: 0; background: rgba(15,26,48,.25); display: none; }
+    .backdrop.open { display: block; }
+    @media (max-width: 680px) { .toolbar { right: 10px; bottom: 10px; border-radius: 12px; } .toolbar button { min-width: 34px; height: 34px; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .index { transition: none; } }
+  </style>
+</head>
+<body>
+  <main class="presentation" id="presentation" aria-label="AgentMore 交互体验优化作品集展示"></main>
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+  <aside class="index" id="index" aria-hidden="true" aria-label="页面目录"><h2>AgentMore 改版</h2><p>交互体验优化设计 · 12 页</p><nav id="index-list"></nav></aside>
+  <nav class="toolbar" aria-label="展示页导航">
+    <button id="previous" type="button" aria-label="上一页" title="上一页（←）">↑</button>
+    <span class="count" id="count" aria-live="polite">01 / 12</span>
+    <button id="next" type="button" aria-label="下一页" title="下一页（→）">↓</button>
+    <span class="divider" aria-hidden="true"></span>
+    <button id="original" type="button" aria-label="单独查看当前页" title="单独查看当前页，可使用浏览器缩放">⤢</button>
+    <button id="menu" type="button" aria-label="打开目录" aria-expanded="false" aria-controls="index" title="目录">☰</button>
+  </nav>
+  <script>
+    const titles = [
+      '封面', '方案概述', '核心体验路径',
+      '问题一：Agent 创建与配置', '问题二：长任务执行进展', '问题三：成果定位成本',
+      '聚焦问题', '设计目标', '优化结果展示',
+      '策略一：快速理解任务成果', '策略二：便捷获取文件', '策略三：掌握修改结果'
+    ];
+    const stage = document.getElementById('presentation');
+    const list = document.getElementById('index-list');
+    const menu = document.getElementById('menu');
+    const index = document.getElementById('index');
+    const backdrop = document.getElementById('backdrop');
+    const count = document.getElementById('count');
+    const prev = document.getElementById('previous');
+    const next = document.getElementById('next');
+    const original = document.getElementById('original');
+    let current = 0;
+    const sections = titles.map((title, i) => {
+      const section = document.createElement('section');
+      section.className = 'slide'; section.id = `page-${i+1}`; section.tabIndex = -1;
+      section.setAttribute('aria-label', `第 ${i+1} 页：${title}`);
+      const h = document.createElement('h1'); h.className = 'sr-only'; h.textContent = title;
+      const img = document.createElement('img');
+      img.src = `slides/${String(i+1).padStart(2,'0')}-retina.png`;
+      img.alt = `第 ${i+1} 页：${title}`;
+      img.loading = i < 2 ? 'eager' : 'lazy';
+      img.decoding = 'async';
+      section.append(h,img);
+      if (i === 8) {
+        const video = document.createElement('video');
+        video.className = 'slide-video improvements';
+        video.src = 'slides/design-improvements.mp4';
+        video.poster = 'slides/design-improvements-poster.jpg';
+        video.setAttribute('aria-label', '优化结果展示演示');
+        video.controls = true;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = 'none';
+        section.append(video);
+      }
+      if (i === 10) {
+        const video = document.createElement('video');
+        video.className = 'slide-video file-preview';
+        video.src = 'slides/strategy-02-top.mp4';
+        video.poster = 'slides/strategy-02-top-poster.jpg';
+        video.setAttribute('aria-label', '侧边文件预览演示');
+        video.controls = true;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = 'none';
+        section.append(video);
+      }
+      if (i === 11) {
+        for (const [position, label] of [['top','追加需求演示'], ['bottom','文件生成失败演示']]) {
+          const video = document.createElement('video');
+          video.className = `slide-video ${position}`;
+          video.src = `slides/strategy-03-${position}.mp4`;
+          video.poster = `slides/strategy-03-${position}-poster.jpg`;
+          video.setAttribute('aria-label', label);
+          video.controls = true;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.preload = 'none';
+          section.append(video);
+        }
+      }
+      stage.append(section);
+      const item = document.createElement('button'); item.type = 'button';
+      item.innerHTML = `<span>${String(i+1).padStart(2,'0')}</span>${title}`;
+      item.addEventListener('click', () => { go(i); showMenu(false); });
+      list.append(item);
+      return section;
+    });
+    const items = [...list.querySelectorAll('button')];
+    function go(i) { sections[Math.min(titles.length-1, Math.max(0,i))].scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'}); }
+    function update(i) {
+      current = i; count.textContent = `${String(i+1).padStart(2,'0')} / ${titles.length}`;
+      prev.disabled = i === 0; next.disabled = i === titles.length-1;
+      items.forEach((item,j) => item.setAttribute('aria-current', j === i ? 'true' : 'false'));
+      if (sections[i+1]) sections[i+1].querySelector('img').loading = 'eager';
+      history.replaceState(null, '', `#page-${i+1}`);
+    }
+    function showMenu(open) {
+      index.setAttribute('aria-hidden', String(!open)); backdrop.classList.toggle('open',open);
+      menu.setAttribute('aria-expanded',String(open)); menu.setAttribute('aria-label', open ? '关闭目录' : '打开目录');
+      if(open) items[current].scrollIntoView({block:'nearest'});
+    }
+    prev.addEventListener('click',()=>go(current-1)); next.addEventListener('click',()=>go(current+1));
+    original.addEventListener('click',()=>window.open(sections[current].querySelector('img').src,'_blank','noopener'));
+    menu.addEventListener('click',()=>showMenu(index.getAttribute('aria-hidden')==='true'));
+    backdrop.addEventListener('click',()=>showMenu(false));
+    addEventListener('keydown',e=>{
+      if(e.key==='Escape') showMenu(false);
+      if(index.getAttribute('aria-hidden')==='false' || /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||'')) return;
+      if(['ArrowRight','PageDown'].includes(e.key)){e.preventDefault();go(current+1)}
+      if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(current-1)}
+    });
+    const observer = new IntersectionObserver(entries=>{
+      const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(visible) update(sections.indexOf(visible.target));
+    },{threshold:[.25,.5,.75]});
+    sections.forEach(s=>observer.observe(s));
+    sections.filter(section => section.querySelector('video')).forEach(section => {
+      const videos = [...section.querySelectorAll('video')];
+      let visible = false;
+      function updatePlayback() {
+        videos.forEach(video => {
+          if (visible && !document.hidden) video.play().catch(() => {});
+          else video.pause();
+        });
+      }
+      new IntersectionObserver(([entry]) => {
+        visible = entry.isIntersecting;
+        updatePlayback();
+      }, {threshold: .6}).observe(section);
+      document.addEventListener('visibilitychange', updatePlayback);
+    });
+    const match=location.hash.match(/^#page-(\d+)$/);
+    if(match) requestAnimationFrame(()=>go(Number(match[1])-1));
+    update(match?Math.min(titles.length-1,Math.max(0,Number(match[1])-1)):0);
+  </script>
+</body>
+</html>
