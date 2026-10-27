@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="581" height="403" preserveAspectRatio="xMidYMid meet" class="avatar-svg state-speak" viewBox="-190 0 1660 1152" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>正在回复｜独立循环 SVG 动画</title>
+<style><![CDATA[
+svg{background:transparent;display:block;width:100%;height:100%;overflow:visible;--ease:cubic-bezier(.22,1,.36,1)}
+.avatar-svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 10px 13px rgba(230,156,99,.025))}
+.character{transform-origin:635px 585px;animation:idleFloat 3.2s ease-in-out infinite}
+.skin{transform-origin:634px 704px;animation:skinBreath 3.2s ease-in-out infinite}
+.brow{transform-origin:520px 444px;transition:transform .28s var(--ease),opacity .2s}
+.eyes{transform-origin:630px 558px;transition:transform .35s var(--ease)}
+.normal-eye{transform-origin:center;animation:blink 5.4s infinite}
+.eye-alt,.mouth-alt{opacity:0;transition:opacity .19s ease}
+.mouth-default{opacity:1;transition:opacity .15s}
+.star{transform-origin:1001px 325px;animation:starIdle 3.5s ease-in-out infinite;transition:filter .28s ease}
+.star-fill{transition:opacity .24s}
+.nose{transform-origin:631px 610px;transition:transform .25s}
+.sparkle,.signal-wave,.think-particle,.loader-dot,.zzz,.halo,.orbit{opacity:0;pointer-events:none}
+.loader-dot,.think-particle{transform-box:fill-box;transform-origin:center}
+.sparkle{transform-box:fill-box;transform-origin:center}
+.signal-wave{fill:none;stroke:#df854b;stroke-width:36;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform-box:view-box}
+.listen-wave{stroke:#df874f;stroke-width:35}
+.speak-wave{stroke:#db7c41;stroke-width:39}
+.state-listen .character{animation:listenLean 2.4s ease-in-out infinite}
+.state-listen .skin{animation:skinBreath 2.4s ease-in-out infinite}
+.state-listen .eyes{animation:attentiveEyes 2.4s ease-in-out infinite}
+.state-listen .brow{transform:translate(-5px,-13px) rotate(-4deg)}
+.state-listen .star{animation:listenStar 2.4s ease-in-out infinite}
+.state-listen .listen-wave{opacity:.28;animation:hearWave 2.25s ease-in-out infinite}
+.state-listen .listen-wave.wave-2{animation-delay:-.75s}
+.state-listen .listen-wave.wave-3{animation-delay:-1.5s}
+.state-listen .mouth-default{opacity:0}
+.state-listen .mouth-small{opacity:1}
+.state-speak .character{animation:speakBob .58s ease-in-out infinite}
+.state-speak .skin{animation:skinBreath .58s ease-in-out infinite}
+.state-speak .eyes{animation:speakEyes 1.6s ease-in-out infinite}
+.state-speak .star{animation:speakStarSpin 2.32s linear infinite;filter:drop-shadow(0 0 13px rgba(255,209,98,.42))}
+.state-speak .brow{transform:translateY(-10px)}
+.state-speak .mouth-default{opacity:0}
+.state-speak .mouth-open{opacity:1;animation:talkMouth .58s ease-in-out infinite}
+.state-speak .speak-wave{opacity:.28;animation:speakWave 1.8s ease-in-out infinite}
+.state-speak .speak-wave.wave-2{animation-delay:-.6s}
+.state-speak .speak-wave.wave-3{animation-delay:-1.2s}
+@keyframes idleFloat{0%,100%{transform:translateY(4px) rotate(-.35deg)}50%{transform:translateY(-6px) rotate(.5deg)}}
+@keyframes skinBreath{0%,100%{transform:scale(1,1)}50%{transform:scale(1.014,1.01)}}
+@keyframes blink{0%,39%,42%,69%,72%,100%{transform:scaleY(1)}40%,70%{transform:scaleY(.07)}}
+@keyframes starIdle{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.045) rotate(4deg)}}
+@keyframes listenLean{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@keyframes attentiveEyes{0%,100%{transform:translateX(-4px)}50%{transform:translateX(8px) translateY(-5px)}}
+@keyframes listenStar{0%,100%{transform:scale(1) rotate(-6deg)}50%{transform:scale(1.13) rotate(10deg)}}
+@keyframes hearWave{0%,100%{opacity:.20;transform:translateX(-5px)}34%{opacity:1;transform:translateX(0)}56%{opacity:.65;transform:translateX(2px)}78%{opacity:.29;transform:translateX(4px)}}
+@keyframes speakWave{0%,100%{opacity:.2;transform:translateX(-4px)}34%{opacity:1;transform:translateX(4px)}58%{opacity:.65;transform:translateX(10px)}81%{opacity:.27;transform:translateX(12px)}}
+@keyframes speakBob{0%,100%{transform:translateY(0) scaleX(1)}45%{transform:translateY(-12px) scaleX(1.018)}}
+@keyframes speakEyes{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes speakStarSpin{0%,9%{transform:rotate(0deg) scale(1)}20%{transform:rotate(90deg) scale(1.15)}27%{transform:rotate(90deg) scale(1.03)}40%{transform:rotate(180deg) scale(1.16)}49%{transform:rotate(180deg) scale(1.02)}61%{transform:rotate(270deg) scale(1.16)}71%{transform:rotate(270deg) scale(1.02)}85%{transform:rotate(360deg) scale(1.15)}93%,100%{transform:rotate(360deg) scale(1)}}
+@keyframes talkMouth{0%,100%{transform:scale(1,.45)}22%{transform:scale(1.12,1.08)}46%{transform:scale(.77,.66)}73%{transform:scale(1.04,1.19)}}
+@media(prefers-reduced-motion:reduce){svg *,svg{animation-duration:.001ms!important;animation-iteration-count:1!important}}
+]]></style>
+<defs>
+  <linearGradient id="skinGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb781"/><stop offset=".54" stop-color="#ffbd88"/><stop offset="1" stop-color="#ffc392"/></linearGradient>
+  <linearGradient id="starGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffec8a"/><stop offset=".55" stop-color="#ffe077"/><stop offset="1" stop-color="#ffce56"/></linearGradient>
+</defs>
+<g class="halo" style="transform-origin:640px 590px"><ellipse cx="640" cy="584" rx="565" ry="395" fill="none" stroke="#ffcca3" stroke-width="5" stroke-dasharray="17 25" /></g>
+<g class="orbit" style="transform-origin:650px 575px"><ellipse cx="650" cy="562" rx="625" ry="280" fill="none" stroke="#fdd1a7" stroke-width="12" transform="rotate(-23 650 562)" stroke-linecap="round" stroke-dasharray="95 530" /></g>
+<g class="character">
+ <g class="skin"><path d="M407 246 H857 C1030 246 1143 375 1143 533 V677 C1143 841 1030 962 859 962 H409 C238 962 124 843 124 678 V534 C124 369 239 246 407 246 Z" fill="url(#skinGrad)" /></g>
+ <g class="face">
+  <path class="brow" d="M373 479 C449 513 593 447 694 376" stroke="#292929" stroke-width="43" stroke-linecap="round" fill="none" />
+  <g class="eyes"><g class="normal-eye"><circle cx="501" cy="560" r="35" fill="#292929"/><circle cx="765" cy="560" r="35" fill="#292929"/></g>
+   <g class="eye-alt eye-happy"><path d="M462 567 Q500 515 542 565 M725 565 Q766 515 807 565" fill="none" stroke="#292929" stroke-width="29" stroke-linecap="round"/></g>
+   <g class="eye-alt eye-sad"><ellipse cx="501" cy="576" rx="33" ry="23" fill="#292929"/><ellipse cx="765" cy="576" rx="33" ry="23" fill="#292929"/></g>
+   <g class="eye-alt eye-sleep"><path d="M468 564 Q499 575 531 564 M733 564 Q763 575 796 564" fill="none" stroke="#292929" stroke-width="21" stroke-linecap="round"/></g>
+  </g>
+  <path class="nose" d="M617 569 Q633 550 645 571 L682 624 Q690 646 670 648 H596 Q577 647 587 626 Z" fill="#292929"/>
+  <g class="mouth">
+   <path class="mouth-default" d="M444 701 H827 C814 797 740 869 636 870 C535 871 457 796 444 701 Z" fill="none" stroke="#292929" stroke-width="40" stroke-linejoin="round" stroke-linecap="round" />
+   <path class="mouth-alt mouth-wake" d="M466 722 C505 816 565 860 639 859 C715 859 775 818 807 719" fill="none" stroke="#292929" stroke-width="40" stroke-linejoin="round" stroke-linecap="round" />
+   <path class="mouth-alt mouth-done" d="M433 711 C472 818 545 908 635 910 C732 912 814 835 852 707" fill="none" stroke="#292929" stroke-width="42" stroke-linejoin="round" stroke-linecap="round" />
+  </g>
+  <g class="mouth-alt mouth-flat"><path d="M566 760 Q640 742 706 753" fill="none" stroke="#292929" stroke-width="31" stroke-linecap="round"/></g>
+  <g class="mouth-alt mouth-small"><ellipse cx="640" cy="752" rx="32" ry="40" fill="#292929"/></g>
+  <g class="mouth-alt mouth-open" style="transform-origin:640px 752px"><ellipse cx="640" cy="761" rx="88" ry="104" fill="#292929"/><ellipse cx="640" cy="823" rx="45" ry="28" fill="#ef916d"/></g>
+  <g class="mouth-alt mouth-frown"><path d="M525 815 Q633 710 743 813" fill="none" stroke="#292929" stroke-width="35" stroke-linecap="round"/></g>
+ </g>
+ <g class="star"><path d="M1003 136 C1025 136 1030 170 1041 208 C1057 269 1107 290 1164 309 C1206 321 1203 350 1165 364 C1107 382 1063 397 1045 457 C1033 504 1027 519 1002 518 C977 517 971 475 957 443 C935 388 891 370 836 357 C795 346 794 322 833 308 C898 286 948 262 968 199 C980 158 981 136 1003 136 Z" fill="url(#starGrad)" stroke="#292929" stroke-width="42" stroke-linejoin="round" stroke-linecap="round"/></g>
+</g>
+<!-- interaction ornaments, intentionally sparse -->
+<g class="sparkle" transform="translate(260 285)"><path d="M0 -23 Q5 -5 22 0 Q6 5 0 23 Q-5 6 -22 0 Q-5 -5 0 -23" fill="#ffd76d"/></g>
+<g class="sparkle" transform="translate(1110 644)" style="animation-delay:.1s"><path d="M0 -18 L5 -5 L18 0 L5 5 L0 18 L-5 5 L-18 0 L-5 -5Z" fill="#ffc29a"/></g>
+<g class="sparkle" transform="translate(222 743)" style="animation-delay:.2s"><circle r="12" fill="#ffd76d"/></g>
+<g class="sparkle" transform="translate(1157 199)" style="animation-delay:.13s"><circle r="11" fill="#ffc49a"/></g>
+<!-- Incoming left sound: three non-overlapping right-facing arcs, short / medium / long. -->
+<g class="signal-wave listen-wave wave-1"><path d="M44 520 Q144 605 44 690"/></g>
+<g class="signal-wave listen-wave wave-2"><path d="M-35 475 Q89 605 -35 735"/></g>
+<g class="signal-wave listen-wave wave-3"><path d="M-115 425 Q49 605 -115 785"/></g>
+<!-- Outgoing right sound: three non-overlapping arcs with increasing span. -->
+<g class="signal-wave speak-wave wave-1"><path d="M1192 604 Q1288 704 1192 804"/></g>
+<g class="signal-wave speak-wave wave-2"><path d="M1260 555 Q1360 705 1260 855"/></g>
+<g class="signal-wave speak-wave wave-3"><path d="M1330 507 Q1484 706 1330 905"/></g>
+<g class="think-particle thought-1"><circle cx="420" cy="129" r="36" fill="#ec9759"/></g><g class="think-particle thought-2"><circle cx="550" cy="92" r="47" fill="#f1b36d"/></g><g class="think-particle thought-3"><circle cx="694" cy="126" r="30" fill="#292929"/></g>
+<g class="loader-dot load-1"><circle cx="489" cy="592" r="43" fill="#292929"/></g><g class="loader-dot load-2"><circle cx="637" cy="592" r="43" fill="#292929"/></g><g class="loader-dot load-3"><circle cx="785" cy="592" r="43" fill="#292929"/></g>
+<g class="zzz z1"><text x="825" y="212" font-size="48" font-weight="700" fill="#d2b3a0">z</text></g><g class="zzz z2"><text x="875" y="169" font-size="32" font-weight="700" fill="#d2b3a0">z</text></g><g class="zzz z3"><text x="904" y="130" font-size="22" font-weight="700" fill="#d2b3a0">z</text></g>
+</svg>
